@@ -164,8 +164,8 @@ Java_com_hill_versa_NdkFunc_lua_1init2(JNIEnv *env, jobject thiz, jobject assetM
     globalEnv = env;
 
     // load file
-    //char file[] = "stylizer.lua";
-    char file[] = "counter_test.lua";
+    char file[] = "stylizer.lua";
+    //char file[] = "counter_test.lua";
     const char *modelFileNative = "/storage/emulated/legacy/qianzu/cache/the_scream.t7";
 //    const char *input_image = "/storage/emulated/legacy/qianzu/download/chicago.jpg";
 //    const char *output_image = "/storage/emulated/legacy/qianzu/download/output.jpg";
@@ -187,8 +187,8 @@ Java_com_hill_versa_NdkFunc_lua_1init2(JNIEnv *env, jobject thiz, jobject assetM
         ret = luaL_loadbuffer(L, filebytes, size, "stylizer");
         lua_pcall(L, 0, 0, 0);
 
-        //lua_getglobal(L, "stylizer");
-        lua_getglobal(L, "testpng");
+        lua_getglobal(L, "stylizer");
+        //lua_getglobal(L, "testpng");
         lua_newtable(L);                            /* Push empty table onto stack table now at -1 */
 
         lua_pushstring(L, "input_image");                /* Push a key onto the stack, table now at -2 */

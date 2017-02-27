@@ -17,12 +17,12 @@
 require 'xlua'
 
 function testpng()
-    print("----testlingshan")
-    if not xlua.require 'liblingshan' then
-        print("----require failed")
-    else
-        print("----require success")
-    end
+--    print("----testlingshan")
+--    if not xlua.require 'liblingshan' then
+--        print("----require failed")
+--    else
+--        print("----require success")
+--    end
 
     print("----testpng")
     if not xlua.require 'libjpeg' then

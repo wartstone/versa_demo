@@ -8,7 +8,7 @@ LOCAL_SRC_FILES := versa_native.cpp android_fopen.c torchandroid.cpp
 
 LOCAL_LDLIBS += -llog -landroid -L$(LOCAL_PATH)/prebuilts -lluaT -lluajit -lTH -lTHNN  -ltorch -lnnx -limage -ltorchandroid
 
-LOCAL_SHARED_LIBRARIES = prebuilts/libpng.so
+#LOCAL_SHARED_LIBRARIES = prebuilts/libpng.so
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -105,23 +105,17 @@ LOCAL_MODULE := libthreadsmain
 LOCAL_SRC_FILES := prebuilts/libthreadsmain.so
 include $(PREBUILT_SHARED_LIBRARY)
 
-# Add prebuilt libjpeg
+# Add prebuilt libpngs
 include $(CLEAR_VARS)
-LOCAL_MODULE := libjpeg
-LOCAL_SRC_FILES := prebuilts/libjpeg.so
-include $(PREBUILT_SHARED_LIBRARY)
-
-# Add prebuilt libpng
-include $(CLEAR_VARS)
-LOCAL_MODULE := libpng
-LOCAL_SRC_FILES := prebuilts/libpng.so
+LOCAL_MODULE := libpngs
+LOCAL_SRC_FILES := prebuilts/libpngs.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 # Add prebuilt libpng16
-#include $(CLEAR_VARS)
-#LOCAL_MODULE := libpng16
-#LOCAL_SRC_FILES := prebuilts/libpng16.so
-#include $(PREBUILT_SHARED_LIBRARY)
+include $(CLEAR_VARS)
+LOCAL_MODULE := libpng16
+LOCAL_SRC_FILES := prebuilts/libpng16.so
+include $(PREBUILT_SHARED_LIBRARY)
 
 # Add prebuilt liblingshan
 include $(CLEAR_VARS)

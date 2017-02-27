@@ -29,7 +29,14 @@ static int icube(lua_State *L){                /* Internal name of func */
  * each function you want available from Lua.
  *
 */
-int luaopen_liblingshan(lua_State *L) {
+
+#ifdef __cplusplus
+
+extern "C" {
+
+#endif
+
+int luaopen_libpng(lua_State *L) {
 //    lua_register(
 //            L,               /* Lua state variable */
 //            "square",        /* func name as known in Lua */
@@ -38,3 +45,18 @@ int luaopen_liblingshan(lua_State *L) {
 //    lua_register(L,"cube",icube);
     return 0;
 }
+
+int luaopen_libpngs(lua_State *L) {
+//    lua_register(
+//            L,               /* Lua state variable */
+//            "square",        /* func name as known in Lua */
+//            isquare          /* func name in this file */
+//    );
+//    lua_register(L,"cube",icube);
+    return 0;
+}
+
+#ifdef __cplusplus
+
+}
+#endif

@@ -150,7 +150,7 @@ end
 
 local function loadPNG(filename, depth, tensortype)
    print("----image loadPNG")
-   if not xlua.require 'libpng' then
+   if not xlua.require 'libpngs' then
       dok.error('libpng package not found, please install libpng','image.loadPNG')
    end
    local load_from_file = 1
@@ -170,7 +170,7 @@ local function clampImage(tensor)
 end
 
 local function savePNG(filename, tensor)
-   if not xlua.require 'libpng' then
+   if not xlua.require 'libpngs' then
       dok.error('libpng package not found, please install libpng','image.savePNG')
    end
    tensor = clampImage(tensor)
