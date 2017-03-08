@@ -1,1 +1,0 @@
-cp libs/*/*.so ../jni/prebuilts
