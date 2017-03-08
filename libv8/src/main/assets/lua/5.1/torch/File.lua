@@ -364,7 +364,6 @@ function File:readObject()
          if not force then
              objects[index] = object
          end
-         print("---- size = " .. size)
          for i = 1,size do
             local k = self:readObject()
             local v = self:readObject()
@@ -399,9 +398,6 @@ function torch.load(filename, mode, referenced)
           '"binary", "b32", "b64" or "ascii" (or nil) expected for mode')
    assert(referenced == nil or referenced == true or referenced == false,
           'true or false (or nil) expected for referenced')
-
-   print("torch.load 1")
-
 
    local longSize
    if mode == 'b32' or mode == 'b64' then

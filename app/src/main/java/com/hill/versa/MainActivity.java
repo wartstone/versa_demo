@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
         ApplicationInfo info = getApplicationInfo();
 
-        String text = String.valueOf(new NdkFunc().lua_init2(getAssets(), info.nativeLibraryDir));
+        String text = String.valueOf(new NdkFunc().lua_init(getAssets(), info.nativeLibraryDir));
 
         TextView textView = (TextView) findViewById(R.id.tv);
         //textView.setText(String.valueOf(new NdkFunc().call_lua2_function(getAssets(), info.nativeLibraryDir)));
