@@ -55,7 +55,7 @@ Java_com_hill_versa_NdkFunc_lua_1init(JNIEnv *env, jobject thiz, jobject assetMa
         D("sleep done");
 
         post_stylize(2);
-        post_stylize(1);
+//        post_stylize(1);
 
         lua_close(L);
     } else {
@@ -111,7 +111,7 @@ void post_stylize(int index) {
     lua_settable(L, -3);
 
     lua_pushstring(L, "image_size");
-    lua_pushinteger(L, 64);
+    lua_pushinteger(L, 512);
     lua_settable(L, -3);
 
     lua_pushstring(L, "timing");
