@@ -11,9 +11,43 @@
     tools:context="com.hill.versa.MainActivity">
 
     <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip"
+        android:text="Result"
+        android:textSize="13sp"
+        android:textColor="#ffffff"
+        android:background="#1d1d1d"/>
+
+    <TextView
+        android:id="@+id/preload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dip"
+        android:text="Preload"
+        android:textSize="13sp"
+        android:background="@drawable/bg_textview"/>
+
+    <TextView
         android:id="@+id/style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dip"
         android:text="Style"
+        android:textSize="13sp"
+        android:background="@drawable/bg_textview"/>
+
+    <TextView
+        android:id="@+id/style2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300dip"
+        android:text="Style2"
+        android:textSize="13sp"
         android:background="@drawable/bg_textview"/>
 </FrameLayout>

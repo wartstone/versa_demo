@@ -84,6 +84,15 @@ function post_stylize(opt)
     --      paths.mkdir(out_dir)
     --    end
     image.save(out_path, img_out)
+
+    image = nil
+    img_pre = nil
+    img_out = nil
+
+    print(collectgarbage("count"))
+    print(collectgarbage("collect"))
+    print(collectgarbage("count"))
+
   end
 
   if opt.input_dir ~= '' then
