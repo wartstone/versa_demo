@@ -1,14 +1,15 @@
 require 'torch'
 require 'nn'
-require 'image'
 
 require 'style_transfer.ShaveImage'
 require 'style_transfer.TotalVariation'
 require 'style_transfer.InstanceNormalization'
+
+local image = require 'image'
 local utils = require 'style_transfer.utils'
 local preprocess = require 'style_transfer.preprocess'
 
-loaders = {}
+local loaders = {}
 
 
 --[[
@@ -17,7 +18,10 @@ directory of images.
 --]]
 
 function pre_load(opt)
-  print("pre_load begin")
+  -- 内存调试
+  collectgarbage("collect")
+  local mem_init_preload = collectgarbage("count")
+  print('--MEM PRELOAD BEGIN : ' .. mem_init_preload)
 
   local ok, checkpoint = pcall(function() return torch.load(opt.model) end)
   if not ok then
@@ -28,9 +32,19 @@ function pre_load(opt)
   end
 
   table.insert(loaders, checkpoint)
+
+  -- 内存调试
+  collectgarbage("collect")
+  local mem_end_preload = collectgarbage("count")
+  print('--MEM PRELOAD END : ' .. mem_end_preload)
 end
 
 function post_stylize(opt)
+  -- 内存调试
+  collectgarbage("collect")
+  local mem_init = collectgarbage("count")
+  print('--MEM POSTSTYLIZE BEGIN : ' .. mem_init)
+
   local index = opt.index
   local checkpoint = loaders[index]
 
@@ -50,6 +64,11 @@ function post_stylize(opt)
   local preprocess = preprocess[preprocess_method]
 
   local function run_image(in_path, out_path)
+    -- 内存调试
+    collectgarbage("collect")
+    local mem_init_runimage = collectgarbage("count")
+    print('--MEM RUN_IMAGE BEGIN : ' .. mem_init_runimage)
+
     print("run_image 1")
     local img = image.load(in_path, 3)
     if opt.image_size > 0 then
@@ -85,13 +104,14 @@ function post_stylize(opt)
     --    end
     image.save(out_path, img_out)
 
-    image = nil
+    model:clearState()
     img_pre = nil
     img_out = nil
 
-    print(collectgarbage("count"))
-    print(collectgarbage("collect"))
-    print(collectgarbage("count"))
+    -- 内存调试
+    collectgarbage("collect")
+    local mem_end_runimage = collectgarbage("count")
+    print('--MEM RUN_IMAGE END : ' .. mem_end_runimage)
 
   end
 
@@ -112,4 +132,14 @@ function post_stylize(opt)
     end
     run_image(opt.input_image, opt.output_image)
   end
+
+  checkpoint = nil
+--  loaders = nil
+
+  -- 内存调试
+  collectgarbage("collect")
+  collectgarbage("collect")
+  collectgarbage("collect")
+  local mem_end = collectgarbage("count")
+  print('--MEM POSTSTYLIZE END : ' .. mem_end)
 end
