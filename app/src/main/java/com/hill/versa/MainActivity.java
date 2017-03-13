@@ -63,27 +63,27 @@ public class MainActivity extends AppCompatActivity {
                 VersaBuilder builder = new VersaBuilder(MainActivity.this);
                 mVersa = builder.build();
                 mVersa.initialize();
-//                mVersa.setLogEnabled(true);
-//                mVersa.setProgressListener(new ProgressListener() {
-//                    @Override
-//                    public void onUpdateProgress(final String log, boolean important) {
-//                        Log.d(TAG, "onUpdateProgress");
-//                        tvResult.setText(log);
-//                    }
-//                });
-//                mVersa.setImageSavedListener(new ImageSavedListener() {
-//                    @Override
-//                    public void onImageSaved(String path) {
-//                        Log.d(TAG, "onImageSaved");
-//                    }
-//                });
-//                mVersa.setCompletionListsner(new CompletionListener() {
-//                    @Override
-//                    public void onComplete() {
-//                        Log.d(TAG, "onComplete");
-//                    }
-//                });
-                //mVersa.preload();
+                mVersa.setLogEnabled(true);
+                mVersa.setProgressListener(new ProgressListener() {
+                    @Override
+                    public void onUpdateProgress(final String log, boolean important) {
+                        Log.d(TAG, "onUpdateProgress");
+                        tvResult.setText(log);
+                    }
+                });
+                mVersa.setImageSavedListener(new ImageSavedListener() {
+                    @Override
+                    public void onImageSaved(String path) {
+                        Log.d(TAG, "onImageSaved");
+                    }
+                });
+                mVersa.setCompletionListsner(new CompletionListener() {
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
+                mVersa.preload();
             }
         }).start();
     }

@@ -38,14 +38,12 @@ public class Versa {
     }
 
     public void initialize() {
-        for(String modelFile : builder.preload_models) {
-            initialize(assetManager, info.nativeLibraryDir, "stylizer.lua", modelFile);
-        }
+        initialize(assetManager, info.nativeLibraryDir, "stylizer.lua");
     }
 
     public void preload() {
         for(String modelFile : builder.preload_models) {
-            preload(modelFile, 0);
+            preload(modelFile);
         }
     }
 
@@ -129,9 +127,9 @@ public class Versa {
     }
 
     // native method
-    private native boolean initialize(AssetManager manager, String path, String luafile, String modelfile);
+    private native boolean initialize(AssetManager manager, String path, String luafile);
 
-    private native boolean preload(String modelFile, int luaStateIndex);
+    private native boolean preload(String modelFile);
 
     private native void postStylize(String inputImage, String outputImage, int modelIndex, int gpu, int useCudnn, int imageSize,
                                      int timing, int medianFilter, int cudnnBenchmark, String backend);
