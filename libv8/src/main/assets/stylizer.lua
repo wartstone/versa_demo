@@ -18,12 +18,10 @@ directory of images.
 --]]
 
 function pre_load(opt)
---  print("pre_load begin")
-
   -- 内存调试
   collectgarbage("collect")
   local mem_init_preload = collectgarbage("count")
-  print('--MEM PRELOAD INI : ' .. mem_init_preload)
+  print('--MEM PRELOAD BEGIN : ' .. mem_init_preload)
 
   local ok, checkpoint = pcall(function() return torch.load(opt.model) end)
   if not ok then
@@ -45,7 +43,7 @@ function post_stylize(opt)
   -- 内存调试
   collectgarbage("collect")
   local mem_init = collectgarbage("count")
-  print('--MEM INIT : ' .. mem_init)
+  print('--MEM POSTSTYLIZE BEGIN : ' .. mem_init)
 
   local index = opt.index
   local checkpoint = loaders[index]
@@ -69,7 +67,7 @@ function post_stylize(opt)
     -- 内存调试
     collectgarbage("collect")
     local mem_init_runimage = collectgarbage("count")
-    print('--MEM RUN_IMAGE INI : ' .. mem_init_runimage)
+    print('--MEM RUN_IMAGE BEGIN : ' .. mem_init_runimage)
 
     print("run_image 1")
     local img = image.load(in_path, 3)
@@ -106,15 +104,9 @@ function post_stylize(opt)
     --    end
     image.save(out_path, img_out)
 
-    preprocess = nil
-    utils = nil
-    image = nil
+    model:clearState()
     img_pre = nil
     img_out = nil
-
---    print(collectgarbage("count"))
---    print(collectgarbage("collect"))
---    collectgarbage("step")
 
     -- 内存调试
     collectgarbage("collect")
@@ -142,12 +134,11 @@ function post_stylize(opt)
   end
 
   checkpoint = nil
---  loaders = nil
 
   -- 内存调试
   collectgarbage("collect")
   collectgarbage("collect")
   collectgarbage("collect")
   local mem_end = collectgarbage("count")
-  print('--MEM END : ' .. mem_end)
+  print('--MEM POSTSTYLIZE END : ' .. mem_end)
 end

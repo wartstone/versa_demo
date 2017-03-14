@@ -57,15 +57,9 @@ public class Versa {
                 builder.timing, builder.medianFilter, builder.cudnnBenchmark, builder.backend);
     }
 
-//    public void stylize() {
-//        File myDir = new File(Environment.getExternalStorageDirectory() + "/Arcade/outputs");
-//
-//        if (!myDir.exists())
-//            myDir.mkdirs();
-//
-//        startStylize(builder.inputImage, builder.outputImage, builder.model, builder.gpu, builder.useCudnn, builder.imageSize,
-//                builder.timing, builder.medianFilter, builder.cudnnBenchmark, builder.backend);
-//    }
+    public void destroy(boolean b) {
+        destroy();
+    }
 
     public void destroyArcade() {
         destroy();
