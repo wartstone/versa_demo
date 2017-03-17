@@ -1,6 +1,9 @@
 package com.hill.versa;
 
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +19,9 @@ import com.versa.lib.listeners.ProgressListener;
 public class MainActivity extends AppCompatActivity {
     private String TAG = "hill/MainActivity";
 
+    private HandlerThread mHandlerThread;
+    private StylizeHandler mHandler;
+
     private TextView tvResult, tvPreload, tvStylize, tvStylize2;
 
     @Override
@@ -25,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
         ApplicationInfo info = getApplicationInfo();
 
-        //String text = String.valueOf(new NdkFunc().lua_init(getAssets(), info.nativeLibraryDir));
+        mHandlerThread = new HandlerThread("stylizethread");
+        mHandlerThread.start();
+        mHandler = new StylizeHandler(mHandlerThread.getLooper(), this);
 
         tvResult = (TextView) findViewById(R.id.result);
 
@@ -53,47 +61,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    
-    private Versa mVersa;
 
     private void initialize() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                VersaBuilder builder = new VersaBuilder(MainActivity.this);
-                mVersa = builder.build();
-                mVersa.initialize();
-                mVersa.setLogEnabled(true);
-                mVersa.setProgressListener(new ProgressListener() {
-                    @Override
-                    public void onUpdateProgress(final String log, boolean important) {
-                        Log.d(TAG, "onUpdateProgress");
-                        tvResult.setText(log);
-                    }
-                });
-                mVersa.setImageSavedListener(new ImageSavedListener() {
-                    @Override
-                    public void onImageSaved(String path) {
-                        Log.d(TAG, "onImageSaved");
-                    }
-                });
-                mVersa.setCompletionListsner(new CompletionListener() {
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "onComplete");
-                    }
-                });
-                mVersa.preload();
-            }
-        }).start();
+        Message msg = Message.obtain();
+        msg.what = StylizeHandler.MSG_PRELOAD;
+        mHandler.sendMessage(msg);
     }
 
     private void post_stylize(final int modelIndex) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mVersa.postStylize(modelIndex);
-            }
-        }).start();
+        Message msg = Message.obtain();
+        msg.obj = modelIndex;
+        msg.what = StylizeHandler.MSG_POSTSTYLIZE;
+        mHandler.sendMessage(msg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandlerThread.quit();//停止Looper的循环
     }
 }
