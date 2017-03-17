@@ -17,6 +17,13 @@ Use a trained feedforward model to stylize either a single image or an entire
 directory of images.
 --]]
 
+function test()
+  print('test in')
+  torch.setnumthreads(4)
+  local no = torch.getnumthreads()
+  print('numthread = ' .. no)
+end
+
 function pre_load(opt)
   -- 内存调试
   collectgarbage("collect")

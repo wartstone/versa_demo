@@ -79,6 +79,16 @@ Java_com_versa_lib_Versa_preload(JNIEnv *env,
     D("preload ret = %d \n", ret);
 }
 
+JNIEXPORT void JNICALL
+Java_com_versa_lib_Versa_test(JNIEnv *env,
+                                 jobject thiz,
+                                 jint num) {
+    lua_getglobal(L, "test");
+
+    int ret = lua_pcall(L, 0, 0, 0);
+    D("preload ret = %d \n", ret);
+}
+
 JNIEXPORT bool JNICALL
 Java_com_versa_lib_Versa_postStylize(
         JNIEnv *env, jobject thiz, jstring inputImage, jstring outputImage, jint modelIndex,

@@ -11,6 +11,17 @@
     tools:context="com.hill.versa.MainActivity">
 
     <TextView
+        android:id="@+id/stopcpucheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="30dip"
+        android:layout_marginTop="40dip"
+        android:text="Stop Check Cpu"
+        android:textSize="13sp"
+        android:background="@drawable/bg_textview"/>
+
+    <TextView
         android:id="@+id/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +59,16 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="300dip"
         android:text="Style2"
+        android:textSize="13sp"
+        android:background="@drawable/bg_textview"/>
+
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="400dip"
+        android:text="Test"
         android:textSize="13sp"
         android:background="@drawable/bg_textview"/>
 </FrameLayout>

@@ -57,6 +57,10 @@ public class Versa {
                 builder.timing, builder.medianFilter, builder.cudnnBenchmark, builder.backend);
     }
 
+    public void test() {
+        test(4);
+    }
+
     public void destroy(boolean b) {
         destroy();
     }
@@ -137,5 +141,7 @@ public class Versa {
     private native void setImageSavedListener();
 
     private native void setCompletionListener();
+
+    private native void test(int num);
 
 }

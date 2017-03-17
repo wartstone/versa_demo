@@ -23,6 +23,7 @@ public class StylizeHandler extends Handler {
 
     public final static int MSG_PRELOAD = 1;
     public final static int MSG_POSTSTYLIZE = 2;
+    public final static int MSG_TEST = 3;
 
     public StylizeHandler(Looper looper, Context context) {
         super(looper);
@@ -35,6 +36,8 @@ public class StylizeHandler extends Handler {
             initialize(mContext);
         } else if (msg.what == MSG_POSTSTYLIZE) {
             postStylize((int)msg.obj);
+        } else if(msg.what == MSG_TEST) {
+            test();
         }
     }
 
@@ -69,5 +72,9 @@ public class StylizeHandler extends Handler {
 
     private void postStylize(int modelIndex) {
         mVersa.postStylize(modelIndex);
+    }
+
+    private void test() {
+        mVersa.test();
     }
 }
